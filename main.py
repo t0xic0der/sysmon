@@ -70,6 +70,11 @@ def custpage(thmcolor="maroon"):
                            thmcolor=thmcolor)
 
 
+@main.route("/fomantic/")
+def fomantic():
+    return render_template("fomantic.html")
+
+
 @click.command()
 @click.option("-p", "--portdata", "portdata", help="Set the port value [0-65536]", default="9696")
 @click.option("-6", "--ipprotv6", "netprotc", flag_value="ipprotv6", help="Start the server on an IPv6 address")

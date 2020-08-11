@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  	<meta charset="utf-8">
+	  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	  	<meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>System Monitor</title>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.js"></script>
+    </head>
+    <body>
+        <div class="ui secondary pointing menu inverted teal">
+            <div class="ui container">
+                <a class="item">
+                    Home
+                </a>
+                <a class="item">
+                    Messages
+                </a>
+                <a class="item active">
+                    Friends
+                </a>
+                <div class="right menu">
+                    <a class="ui item">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+        <h2 class="ui header teal text raised segment container">
+            <i class="settings icon"></i>
+            <div class="content">
+                Account Settings
+                <div class="sub header">Manage your preferences</div>
+            </div>
+        </h2>
+        <div class="ui raised teal text container segment">
+            <h2 class="ui header teal">Dogs Roles with Humans</h2>
+            <p style="text-align: justify;">Domestic dogs inherited complex behaviors, such as bite inhibition, from their wolf ancestors, which would have been pack hunters with complex body language. These sophisticated forms of social cognition and communication may account for their trainability, playfulness, and ability to fit into human households and social situations, and these attributes have given dogs a relationship with humans that has enabled them to become one of the most successful species on the planet today.</p>
+            <p style="text-align: justify;">The dogs' value to early human hunter-gatherers led to them quickly becoming ubiquitous across world cultures. Dogs perform many roles for people, such as hunting, herding, pulling loads, protection, assisting police and military, companionship, and, more recently, aiding handicapped individuals. This impact on human society has given them the nickname "man's best friend" in the Western world. In some cultures, however, dogs are also a source of meat.</p>
+            <button class="teal ui button" onclick="ProgressIncrement();">Positive Button</button>
+            <button class="teal ui button" onclick="ProgressDecrement();">Negative Button</button>
+        </div>
+        <div class="ui container text">
+            <div class="ui small indicating progress" data-value="1" data-total="20" id="example4">
+                <div class="bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="label">Adding Photos</div>
+            </div>
+        </div>
+    </body>
+    <script>
+        function ProgressIncrement()
+        {
+            $('#example4')
+                .progress("increment");
+        }
+        function ProgressDecrement()
+        {
+            $('#example4')
+                .progress("decrement");
+        }
+    </script>
+</html>
