@@ -8,8 +8,24 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.css">
         <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.js"></script>
+        <script type="text/javascript">
+            async function CheckHeartBeat()
+            {
+                while (1)
+                {
+                    await new Promise(r => setTimeout(r, 1000));
+                    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+                    $.getJSON($SCRIPT_ROOT+"/hartbeat/",
+                        function(data) {}
+                    )
+                    $(document).ajaxError(function(){
+                        BringOnTheModal();
+                    });
+                }
+            }
+        </script>
     </head>
-    <body>
+    <body onload="CheckHeartBeat();">
         <div class="ui secondary pointing menu inverted teal">
             <div class="ui container">
                 <a class="item">
@@ -51,6 +67,20 @@
             </div>
         </div>
     </body>
+    <div class="ui basic modal">
+        <div class="ui icon header">
+            <i class="exclamation triangle icon"></i>
+        </div>
+        <div class="content" style="text-align: center;">
+            <p>A communication to the server could not be established.<br/>Please refresh the page to attempt connecting again.</p>
+        </div>
+        <div class="actions" style="text-align: center;">
+            <div class="ui teal ok basic inverted button" onclick="location.reload();">
+                <i class="refresh icon"></i>
+                Refresh
+            </div>
+        </div>
+    </div>
     <script>
         function ProgressIncrement()
         {
@@ -61,6 +91,13 @@
         {
             $('#example4')
                 .progress("decrement");
+        }
+        function BringOnTheModal()
+        {
+            $('.ui.basic.modal')
+                .modal('setting', 'closable', false)
+                .modal('show')
+            ;
         }
     </script>
 </html>

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify
 import back, click
-
+import time
 
 main = Flask(__name__)
 
@@ -47,6 +47,12 @@ def fetcinfo():
                        cpuprcnt=cpuprcnt, cpustats=cpustats, cpuclock=cpuclock,
                        diousage=diousage, netusage=netusage, procinfo=procinfo,
                        senstemp=senstemp, fanspeed=fanspeed, battstat=battstat)
+    return retnjson
+
+
+@main.route("/hartbeat/")
+def hartbeat():
+    retnjson = jsonify(timedata = str(time.ctime()), statusnw = "ALIVENOW")
     return retnjson
 
 
