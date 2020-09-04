@@ -8,6 +8,7 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.css">
         <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
         <script type="text/javascript">
             async function CheckHeartBeat()
             {
@@ -16,7 +17,9 @@
                     await new Promise(r => setTimeout(r, 1000));
                     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
                     $.getJSON($SCRIPT_ROOT+"/hartbeat/",
-                        function(data) {}
+                        function(data) {
+                            console.log(data["timedata"]);
+                        }
                     )
                     $(document).ajaxError(function(){
                         BringOnTheModal();
@@ -27,7 +30,7 @@
     </head>
     <body onload="CheckHeartBeat();">
         <div class="ui secondary pointing menu inverted teal">
-            <div class="ui container">
+            <div class="ui container" style="font-family: 'Inter', sans-serif;">
                 <a class="item">
                     Home
                 </a>
@@ -44,21 +47,30 @@
                 </div>
             </div>
         </div>
-        <h2 class="ui header teal text raised segment container">
-            <i class="settings icon"></i>
-            <div class="content">
-                Account Settings
-                <div class="sub header">Manage your preferences</div>
-            </div>
+        <h2 class="ui center aligned icon header teal" style="margin: auto;">
+            <i class="circular sync icon"></i>
+            <div class="content" style="font-family: 'Inter', sans-serif;">t0xic0der@ToxicDragon<div class="sub header">Linux 5.8.5-arch1-1 [x86_64]</div></div>
         </h2>
-        <div class="ui raised teal text container segment">
-            <h2 class="ui header teal">Dogs Roles with Humans</h2>
-            <p style="text-align: justify;">Domestic dogs inherited complex behaviors, such as bite inhibition, from their wolf ancestors, which would have been pack hunters with complex body language. These sophisticated forms of social cognition and communication may account for their trainability, playfulness, and ability to fit into human households and social situations, and these attributes have given dogs a relationship with humans that has enabled them to become one of the most successful species on the planet today.</p>
-            <p style="text-align: justify;">The dogs' value to early human hunter-gatherers led to them quickly becoming ubiquitous across world cultures. Dogs perform many roles for people, such as hunting, herding, pulling loads, protection, assisting police and military, companionship, and, more recently, aiding handicapped individuals. This impact on human society has given them the nickname "man's best friend" in the Western world. In some cultures, however, dogs are also a source of meat.</p>
-            <button class="teal ui button" onclick="ProgressIncrement();">Positive Button</button>
-            <button class="teal ui button" onclick="ProgressDecrement();">Negative Button</button>
+        <div class="ui raised teal container segment">
+            <h2 class="ui header teal" style="font-family: 'Inter', sans-serif;">About</h2>
+            <table class="ui compact table" style="font-family: 'Inter', sans-serif;">
+                <tbody>
+                    <tr><td class="six wide" style="font-weight: bold;">System name</td><td class="ten wide">Approved</td></tr>
+                    <tr><td class="six wide" style="font-weight: bold;">Host name</td><td class="ten wide">Approved</td></tr>
+                    <tr><td class="six wide" style="font-weight: bold;">Version</td><td class="ten wide">Approved</td></tr>
+                    <tr><td class="six wide" style="font-weight: bold;">Username</td><td class="ten wide">Approved</td></tr>
+                    <tr><td class="six wide" style="font-weight: bold;">Boot time</td><td class="ten wide">Approved</td></tr>
+                </tbody>
+            </table>
         </div>
-        <div class="ui container text">
+        <div class="ui raised teal container segment">
+            <h2 class="ui header teal" style="font-family: 'Inter', sans-serif;">Dogs Roles with Humans</h2>
+            <p style="text-align: justify; font-family: 'Inter', sans-serif;">Domestic dogs inherited complex behaviors, such as bite inhibition, from their wolf ancestors, which would have been pack hunters with complex body language. These sophisticated forms of social cognition and communication may account for their trainability, playfulness, and ability to fit into human households and social situations, and these attributes have given dogs a relationship with humans that has enabled them to become one of the most successful species on the planet today.</p>
+            <p style="text-align: justify; font-family: 'Inter', sans-serif;">The dogs' value to early human hunter-gatherers led to them quickly becoming ubiquitous across world cultures. Dogs perform many roles for people, such as hunting, herding, pulling loads, protection, assisting police and military, companionship, and, more recently, aiding handicapped individuals. This impact on human society has given them the nickname "man's best friend" in the Western world. In some cultures, however, dogs are also a source of meat.</p>
+            <button class="teal ui button" style="font-family: 'Inter', sans-serif;" onclick="ProgressIncrement();">Positive Button</button>
+            <button class="teal ui button" style="font-family: 'Inter', sans-serif;" onclick="ProgressDecrement();">Negative Button</button>
+        </div>
+        <div class="ui container">
             <div class="ui small indicating progress" data-value="1" data-total="20" id="example4">
                 <div class="bar">
                     <div class="progress"></div>
@@ -66,16 +78,41 @@
                 <div class="label">Adding Photos</div>
             </div>
         </div>
+        <br/>
+        <div class="ui container">
+            <div class="ui four stackable cards">
+                <div class="ui card">
+                    <div class="content"><div class="header">CPU #0</div><div class="meta">69%</div><div class="description">Current 900MhZ<br/>Min 800MhZ<br/>Max 3500MhZ<br/></div></div>
+                    <div class="extra content"><i class="check icon"></i>121 Votes</div>
+                </div>
+                <div class="ui card">
+                    <div class="content"><div class="header">CPU #0</div><div class="meta">69%</div><div class="description">Current 900MhZ<br/>Min 800MhZ<br/>Max 3500MhZ<br/></div></div>
+                    <div class="extra content"><i class="check icon"></i>121 Votes</div>
+                </div>
+                <div class="ui card">
+                    <div class="content"><div class="header">CPU #0</div><div class="meta">69%</div><div class="description">Current 900MhZ<br/>Min 800MhZ<br/>Max 3500MhZ<br/></div></div>
+                    <div class="extra content"><i class="check icon"></i>121 Votes</div>
+                </div>
+                <div class="ui card">
+                    <div class="content"><div class="header">CPU #0</div><div class="meta">69%</div><div class="description">Current 900MhZ<br/>Min 800MhZ<br/>Max 3500MhZ<br/></div></div>
+                    <div class="extra content"><i class="check icon"></i>121 Votes</div>
+                </div>
+                <div class="ui card">
+                    <div class="content"><div class="header">CPU #0</div><div class="meta">69%</div><div class="description">Current 900MhZ<br/>Min 800MhZ<br/>Max 3500MhZ<br/></div></div>
+                    <div class="extra content"><i class="check icon"></i>121 Votes</div>
+                </div>
+            </div>
+        </div>
     </body>
     <div class="ui basic modal">
         <div class="ui icon header">
             <i class="exclamation triangle icon"></i>
         </div>
-        <div class="content" style="text-align: center;">
+        <div class="content" style="text-align: center; font-family: 'Inter', sans-serif;">
             <p>A communication to the server could not be established.<br/>Please refresh the page to attempt connecting again.</p>
         </div>
         <div class="actions" style="text-align: center;">
-            <div class="ui teal ok basic inverted button" onclick="location.reload();">
+            <div class="ui teal ok basic inverted button" style="font-family: 'Inter', sans-serif;" onclick="location.reload();">
                 <i class="refresh icon"></i>
                 Refresh
             </div>
