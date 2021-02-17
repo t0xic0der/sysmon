@@ -1,52 +1,46 @@
-@font-face {
-    font-family: "Barlow-Regular";
-    src: url("../font/brlw-rlar.woff");
-}
+/*
+##########################################################################
+*
+*   Copyright © 2019-2020 Akashdeep Dhar <t0xic0der@fedoraproject.org>
+*
+*   This program is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*
+##########################################################################
+*/
 
 @font-face {
-    font-family: "Barlow-Bold";
-    src: url("../font/brlw-bold.woff");
+    font-family: "IBM Plex Sans";
+    src: url("../font/plex-rlar.ttf");
 }
 
 @font-face {
-    font-family: "Barlow-Italic";
-    src: url("../font/brlw-ital.woff");
+    font-family: "IBM Plex Sans";
+    font-style: italic;
+    src: url("../font/plex-ital.ttf");
 }
 
 @font-face {
-    font-family: "Barlow-Bold-Italic";
-    src: url("../font/brlw-bdit.woff");
+    font-family: "IBM Plex Sans";
+    font-weight: bold;
+    src: url("../font/plex-bold.ttf");
 }
 
-.headelem {
-    font-family: "Barlow-Bold";
-}
-
-.hugeelem {
-    font-family: "Barlow-Bold-Italic";
-}
-
-.normelem {
-    font-family: "Barlow-Regular";
-}
-
-.italelem {
-    font-family: "Barlow-Italic";
-}
-
-.forggrin {
-    background-color: rgb(32,192,160);
-}
-
-.headcard {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.blcktint {
-    color: #000000;
+@font-face {
+    font-family: "IBM Plex Sans Bold";
+    font-weight: bold;
+    font-style: italic;
+    src: url("../font/plex-bdit.ttf");
 }
 
 /* Preventing text-selection and copy-paste */
@@ -67,4 +61,8 @@
 
 .cuntainer::-webkit-scrollbar {
     display: none;
+}
+
+.bodyfont {
+    font-family: 'IBM Plex Sans', sans-serif !important;
 }

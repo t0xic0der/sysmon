@@ -1,0 +1,187 @@
+<!--
+##########################################################################
+*
+*   Copyright © 2019-2020 Akashdeep Dhar <t0xic0der@fedoraproject.org>
+*
+*   This program is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*
+##########################################################################
+-->
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html lang="en">
+    <head>
+        <script type="text/javascript" src="/static/jscn/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/jscn/semantic.js"></script>
+        <link type="text/css" rel="stylesheet" type="text/css" href="/static/css3/semantic.css">
+        <link type="text/css" rel="stylesheet" type="text/css" href="/static/css3/custfrmt.css">
+        <script type="text/javascript" src="/static/jscn/smoothie.js"></script>
+        <script type="text/javascript" src="/static/jscn/supervisor.js"></script>
+        <title>SuperVisor</title>
+    </head>
+    <body onload="AskForWebSocketEndpoint();" class="bodyfont">
+        <div class="ui secondary pointing menu inverted" style="background-color: #00c080;">
+            <div class="ui simple dropdown item">
+                <span style="font-weight: bold;" class="bodyfont">SuperVisor</span>
+                <i class="dropdown icon"></i>
+                <div class="menu bodyfont">
+                    <a class="item" onclick=""><i class="chart line circle icon"></i>Overview</a>
+                    <a class="item" onclick=""><i class="server icon"></i>Processes</a>
+                    <a class="item" onclick=""><i class="microchip icon"></i>CPU</a>
+                    <a class="item" onclick=""><i class="memory icon"></i>Memory</a>
+                    <a class="item" onclick=""><i class="upload icon"></i>Storage</a>
+                    <a class="item" onclick=""><i class="wifi icon"></i>Network</a>
+                    <a class="item" onclick=""><i class="eye icon"></i>Sensors</a>
+                    <a class="item" onclick=""><i class="fire icon"></i>Thermal</a>
+                </div>
+            </div>
+            <a class="item bodyfont">Overview</a>
+            <div class="right menu">
+                <a class="ui item" href="#four"><i class="power off icon"></i></a>
+            </div>
+        </div>
+        <h2 class="ui container center aligned icon header bodyfont" style="color: #00c080;">
+            <i class="circular eye icon"></i>SuperVisor
+            <div class="sub header">
+                An intuitive remotely-accessible system performance monitoring and task management tool for servers and headless Raspberry Pi setups.
+            </div>
+        </h2>
+        <div class="ui container"><hr style="background-color: #cccccc; height: 2px; border: none; margin-bottom: 2.5%; margin-top: 2.5%"/></div>
+        <div class="ui container one cards">
+            <div class="ui container padded card bodyfont">
+                <div class="content">
+                    <div class="description">
+                        <table class="ui very basic compact fixed table">
+                            <tbody><tr><td style="font-weight: bold;">Username</td><td id="userover">Unavailable</td></tr></tbody>
+                            <tbody><tr><td style="font-weight: bold;">System name</td><td id="systover">Unavailable</td></tr></tbody>
+                            <tbody><tr><td style="font-weight: bold;">Host name</td><td id="hostover">Unavailable</td></tr></tbody>
+                            <tbody><tr><td style="font-weight: bold;">Version</td><td id="versover">Unavailable</td></tr></tbody>
+                            <tbody><tr><td style="font-weight: bold;">Boot time</td><td id="bootover">Unavailable</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui container two cards">
+            <div class="padded card bodyfont">
+                <div class="content">
+                    <div class="header bodyfont" style="color: #00c080;">CPU Usage</div>
+                    <div class="meta"><span id="cpusvalu">0</span>% in use</div>
+                    <div class="description">
+                        <canvas id="cpusover" style="width:100%; height:12.5vh;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="padded card bodyfont">
+                <div class="content">
+                    <div class="header bodyfont" style="color: #00c080;">Physical memory</div>
+                    <div class="meta"><span id="physvalu">0</span>% in use</div>
+                    <div class="description">
+                        <canvas id="physover" style="width:100%; height:12.5vh;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="padded card bodyfont">
+                <div class="content">
+                    <div class="header bodyfont" style="color: #00c080;">Virtual memory</div>
+                    <div class="meta"><span id="swapvalu">0</span>% in use</div>
+                    <div class="description">
+                        <canvas id="swapover" style="width:100%; height:12.5vh;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="padded card bodyfont">
+                <div class="content">
+                    <div class="header bodyfont" style="color: #00c080;">Battery</div>
+                    <div class="meta"><span id="battvalu">0</span>% remaining</div>
+                    <div class="description">
+                        <canvas id="battover" style="width:100%; height:12.5vh;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui container"><hr style="background-color: #cccccc; height: 2px; border: none; margin-bottom: 1.25%; margin-top: 2.5%"/></div>
+        <!--
+        <h2 class="ui container center aligned header"><div class="content bodyfont" style="color: #00c080;">CPU usage</div></h2>
+        -->
+        <div class="ui container bodyfont">
+            <div class="ui top attached tabular menu bodyfont teal">
+                <a class="item" id="cpuu-head-ttle" style="font-weight: bold; color: #008080;">CPU usage</a>
+                <a class="active item" id="cpuu-usej-ttle" onclick="SwitchTab('cpuu-usej-ttle', 'cpuu-usej-body');">Usage</a>
+                <a class="item" id="cpuu-time-ttle" onclick="SwitchTab('cpuu-time-ttle', 'cpuu-time-body');">Times</a>
+                <a class="item" id="cpuu-stat-ttle" onclick="SwitchTab('cpuu-stat-ttle', 'cpuu-stat-body');">Statistics</a>
+            </div>
+            <div class="ui bottom attached active tab segment" id="cpuu-usej-body">
+                <div class="ui two cards" id="prcpgraf"></div>
+            </div>
+            <div class="ui bottom attached tab segment" id="cpuu-time-body">
+                <table class="ui teal fixed compact definition table bodyfont">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>USER</th><th>NICE</th><th>SYST</th><th>IDLE</th><th>IOWT</th>
+                            <th>IREQ</th><th>SOFT</th><th>STEL</th><th>GEST</th><th>GTNC</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cpuu-time-tabl-cont">
+                  </tbody>
+                </table>
+            </div>
+            <div class="ui bottom attached tab segment" id="cpuu-stat-body">
+                <h1>Hello</h1>
+            </div>
+        </div>
+        <div class="ui container"><hr style="background-color: #cccccc; height: 2px; border: none; margin-bottom: 2.5%; margin-top: 2.5%"/></div>
+        <div class="ui tiny modal" id="restwarn">
+            <div class="header bodyfont cardinal" style="padding: 1.5%; background-color: #00c080; color: #ffffff;">Connect</div>
+            <div class="content" style="padding: 1.5%;">
+                <p class="bodyfont" style="line-height: 1.25; text-align: justify; font-size: 15px;">
+                    Enable the SuperVisor driver service on your remote device first. Once the driver has been set up,
+                    take a note of the uniform resource identifier and the connector passphrase enter it here to begin
+                    monitoring its performance.
+                    <div class="ui form">
+                        <div class="two fields bodyfont">
+                            <div class="field">
+                                <input class="bodyfont" id="vsonsuri" placeholder="LiveSync URI" type="text">
+                            </div>
+                            <div class="field">
+                                <input class="bodyfont" id="passcode" placeholder="Connector passphrase" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </p>
+            </div>
+            <div class="actions cardinal" style="padding: 1.5%; background-color: #00c080;">
+                <div class="ui mini button bodyfont" onclick="FetchWebSocketEndpoint(); $('#restwarn').modal('hide');">
+                    <span><i style="color: #008080;" class="check icon"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="ui tiny modal" id="wrngiden">
+            <div class="header bodyfont cardinal" style="padding: 1.5%; background-color: #00c080; color: #ffffff;">Access denied</div>
+            <div class="content" style="padding: 1.5%;">
+                <p class="bodyfont" style="line-height: 1.25; text-align: justify; font-size: 15px;">
+                    The connector passphrase provided does not match with that of the driver service.
+                    Please reload the page and try entering the passphrase correctly.
+                </p>
+            </div>
+            <div class="actions cardinal" style="padding: 1.5%; background-color: #00c080;">
+                <div class="ui mini button bodyfont" onclick="location.reload();">
+                    <span><i style="color: #008080;" class="redo icon"></i></span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -12,6 +12,24 @@
         <link rel="stylesheet" href="{{ url_for("static", filename="css3/toastr.css") }}" />
 	  	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
         <script type="text/javascript">
+            function search_filter_table(){
+                let input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toLowerCase();
+                table = document.getElementById("proclist");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1]
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
             async function UpdateValues() {
             while (1)
             {
@@ -191,6 +209,7 @@
                                 document.getElementById("fans-peed-curt-"+indx+"-"+jndx).innerText = data.fanspeed[indx][jndx][1];
                             }
                         }
+                        search_filter_table()
                     });
                 }
             }
@@ -402,7 +421,7 @@
                                 <h5 id="proc-info-ttle" class="card-title m-0 headelem">Processes ({{ procinfo|length }})</h5>
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 200px;">
-                                        <input type="text" name="table_search" class="form-control float-right normelem" placeholder="Search">
+                                        <input type="text" name="table_search" class="form-control float-right normelem" id="myInput" onkeypress="search_filter_table()" placeholder="Search">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                         </div>

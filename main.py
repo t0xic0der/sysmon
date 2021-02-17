@@ -1,8 +1,34 @@
-import back, click
+'''
+##########################################################################
+*
+*   Copyright © 2019-2020 Akashdeep Dhar <t0xic0der@fedoraproject.org>
+*
+*   This program is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*
+##########################################################################
+'''
+
 from flask import Flask, render_template, jsonify
+
+import back
+import click
+import logging
 
 
 main = Flask(__name__)
+loge = logging.getLogger("werkzeug")
+loge.setLevel(logging.ERROR)
 
 
 @main.route("/termproc/<prociden>/", methods=["GET"])
@@ -50,6 +76,11 @@ def fetcinfo():
     return retnjson
 
 
+@main.route("/")
+def graphing():
+    return render_template("mainpytm.html")
+
+
 @main.route("/<thmcolor>/", methods=["GET"])
 def custpage(thmcolor="maroon"):
     retndata = back.GetOSUnameData()
@@ -77,14 +108,16 @@ def custpage(thmcolor="maroon"):
 @click.version_option(version="0.1.0", prog_name="WebStation SYSMON by t0xic0der")
 def mainfunc(portdata, netprotc):
     print(" * Starting WebStation SYSMON by t0xic0der...")
-    print(" * Port number : " + str(portdata))
+    print(" * Port number  : " + str(portdata))
     netpdata = ""
     if netprotc == "ipprotv6":
-        print(" * IP version  : 6")
+        print(" * IP version   : 6")
         netpdata = "::"
     elif netprotc == "ipprotv4":
-        print(" * IP version  : 4")
+        print(" * IP version   : 4")
         netpdata = "0.0.0.0"
+    print(" * Logs state   : Errors only")
+    main.config["TEMPLATES_AUTO_RELOAD"] = True
     main.run(port=portdata, host=netpdata)
 
 
